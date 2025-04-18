@@ -1,4 +1,4 @@
-import ui.MenuRecursivo;
+import ui.vista.MenuRecursivo;
 import javax.swing.SwingUtilities;
 
 public class Main {

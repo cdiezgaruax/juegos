@@ -1,4 +1,4 @@
-package base;
+package base.modelo;
 
 import java.util.List;
 import java.io.PrintWriter;
@@ -87,3 +87,4 @@ public abstract class AlgoritmoRecursivo extends ObjetoBase {
         return parametro;
     }
 }
+

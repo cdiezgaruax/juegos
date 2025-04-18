@@ -1,7 +1,6 @@
-package base;
+package base.vista;
 
 import javax.swing.*;
-import java.awt.*;
 
 /**
  * Clase abstracta que crea una ventana que será nuestro menú principal.

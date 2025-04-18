@@ -1,6 +1,6 @@
-package hanoi;
+package hanoi.modelo;
 
-import base.AlgoritmoRecursivo;
+import base.modelo.AlgoritmoRecursivo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;

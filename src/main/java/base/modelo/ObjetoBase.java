@@ -1,4 +1,4 @@
-package base;
+package base.modelo;
 
 /**
  * Clase base para cualquier objeto de la aplicación.
