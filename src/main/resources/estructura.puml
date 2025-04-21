@@ -1,0 +1,166 @@
+@startuml
+
+package "base.modelo" {
+  abstract class ObjetoBase {
+    - id: String
+    - descripcion: String
+    + getId(): String
+    + setId(id: String): void
+    + getDescripcion(): String
+    + setDescripcion(descripcion: String): void
+    + representar(): String
+    + toString(): String
+  }
+
+  abstract class AlgoritmoRecursivo {
+    - parametro: int
+    - pasos: List<int[]>
+    + setParametros(n: int): void
+    + ejecutar(): void
+    + getPasos(): List<int[]>
+    + guardarResultado(nombreArchivo: String): void
+    + vectorToString(vector: int[]): String
+    + getParametro(): int
+  }
+
+  ObjetoBase <|-- AlgoritmoRecursivo
+}
+
+package "base.vista" {
+  abstract class VentanaJuego {
+    - btnSimular: JButton
+    - btnVolverMenu: JButton
+    + initComponents(): void
+    + mostrar(): void
+  }
+  abstract class MenuGrafico {
+    + initMenu(): void
+    + mostrarMenu(): void
+  }
+}
+
+package "base.controlador" {
+  class Dialogos {
+    + pedirEntero(prompt: String, min: int, max: int): Integer
+  }
+}
+
+package "caballo.modelo" {
+  class ProblemaCaballo {
+    - n: int
+    - tablero: int[][]
+    - pasos: List<int[]>
+    - startX: int
+    - startY: int
+    + setParametros(n: int): void
+    + setStart(x: int, y: int): void
+    + ejecutar(): void
+    + getPasos(): List<int[]>
+    + getTablero(): int[][]
+    + guardarResultado(nombreArchivo: String): void
+    + guardarTablero(nombreArchivo: String): void
+    + representar(): String
+  }
+
+  AlgoritmoRecursivo <|-- ProblemaCaballo
+}
+
+package "caballo.controlador" {
+  class LanzadorCaballo {
+    + ejecutarSimulacion(): void
+  }
+  LanzadorCaballo ..> ProblemaCaballo
+  LanzadorCaballo ..> ui.vista.MenuRecursivo
+}
+
+package "caballo.vista" {
+  class VentanaCaballo {
+    + VentanaCaballo(titulo: String, problema: ProblemaCaballo)
+    + initComponents(): void
+    + onReload(): void
+  }
+  VentanaCaballo ..> ProblemaCaballo
+  VentanaCaballo ..> Dialogos
+  VentanaCaballo ..> ui.vista.MenuRecursivo
+  VentanaCaballo <|-- base.vista.VentanaJuego
+}
+
+package "hanoi.modelo" {
+  class ProblemaTorresHanoi {
+    - n: int
+    - torreOrigen: Stack<Integer>
+    - torreAuxiliar: Stack<Integer>
+    - torreDestino: Stack<Integer>
+    + setParametros(n: int): void
+    + ejecutar(): void
+    + getPasos(): List<int[]>
+    + getEstadoTorres(): String
+    + representar(): String
+  }
+
+  AlgoritmoRecursivo <|-- ProblemaTorresHanoi
+}
+
+package "hanoi.controlador" {
+  class LanzadorTorresHanoi {
+    + ejecutarSimulacion(): void
+  }
+  LanzadorTorresHanoi ..> ProblemaTorresHanoi
+  LanzadorTorresHanoi ..> hanoi.vista.VentanaTorresHanoi
+}
+
+package "hanoi.vista" {
+  class VentanaTorresHanoi {
+    + VentanaTorresHanoi(titulo: String, problema: ProblemaTorresHanoi)
+    + initComponents(): void
+  }
+  VentanaTorresHanoi ..> ProblemaTorresHanoi
+  VentanaTorresHanoi <|-- base.vista.VentanaJuego
+}
+
+package "nreinas.modelo" {
+  class ProblemaNReinas {
+    - n: int
+    - board: int[][]
+    + setParametros(n: int): void
+    + ejecutar(): void
+    + getPasos(): List<int[]>
+    + getTablero(): int[][]
+    + guardarTableroFinal(nombreArchivo: String): void
+    + representar(): String
+  }
+
+  AlgoritmoRecursivo <|-- ProblemaNReinas
+}
+
+package "nreinas.controlador" {
+  class LanzadorNReinas {
+    + ejecutarSimulacion(): void
+  }
+  LanzadorNReinas ..> ProblemaNReinas
+  LanzadorNReinas ..> nreinas.vista.VentanaNReinas
+}
+
+package "nreinas.vista" {
+  class VentanaNReinas {
+    + VentanaNReinas(titulo: String, problema: ProblemaNReinas)
+    + initComponents(): void
+  }
+  VentanaNReinas ..> ProblemaNReinas
+  VentanaNReinas <|-- base.vista.VentanaJuego
+}
+
+package "ui.vista" {
+  class MenuRecursivo {
+    + MenuRecursivo()
+    + initMenu(): void
+  }
+  MenuRecursivo <|-- base.vista.MenuGrafico
+}
+
+class Main {
+  + main(args: String[]): void
+}
+Main ..> ui.vista.MenuRecursivo
+
+@enduml

@@ -4,6 +4,7 @@ import base.vista.VentanaJuego;
 import caballo.controlador.LanzadorCaballo;
 import caballo.modelo.ProblemaCaballo;
 import ui.vista.MenuRecursivo;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -92,8 +93,6 @@ public class VentanaCaballo extends VentanaJuego {
                 for (JButton btn: fila) {
                     btn.setText("");
                     btn.setForeground(Color.BLACK);
-                    // restaurar listeners: opcional, pero aquí asumimos que
-                    // no volverán a querer seleccionar
                 }
             }
 
@@ -106,7 +105,6 @@ public class VentanaCaballo extends VentanaJuego {
                     p.setText(String.valueOf(stepIndex - 1));
                     p.setForeground(Color.RED);
                     p.setFont(p.getFont().deriveFont(Font.BOLD, 14f));
-                    // quitar listeners para que ya no responda
                     for (ActionListener al : p.getActionListeners()) {
                         p.removeActionListener(al);
                     }
@@ -119,7 +117,13 @@ public class VentanaCaballo extends VentanaJuego {
                     c.setForeground(Color.BLACK);
                     c.setFont(c.getFont().deriveFont(Font.BOLD, 16f));
                 } else {
+                    // ───────────→ TERMINA SIMULACIÓN ←───────────
                     timer.stop();
+                    // == Guarda los archivos ==
+                    String movFile = "resultadoCaballo_" + n + "x" + n + "("+startX+","+startY+")" +  ".txt";
+                    String tabFile = "tableroFinalCaballo_" + n + "x" + n + "("+startX+","+startY+")" +".txt";
+                    problema.guardarResultado(movFile);
+                    problema.guardarTablero(tabFile);
                 }
                 stepIndex++;
             });
