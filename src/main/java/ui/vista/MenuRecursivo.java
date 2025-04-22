@@ -15,8 +15,8 @@ public class MenuRecursivo extends MenuGrafico {
 
     @Override
     protected void initMenu() {
-        // Creamos un solo panel de 4 filas, 1 columna (exactamente 4 botones)
-        JPanel panel = new JPanel(new GridLayout(4, 1, 10, 10));
+        // Creamos un solo panel de 4 filas, 1 columna (exactamente 3 botones)
+        JPanel panel = new JPanel(new GridLayout(3, 1, 10, 10));
 
         JButton b1 = new JButton("Problema del Caballo");
         b1.addActionListener(e -> {
@@ -38,10 +38,6 @@ public class MenuRecursivo extends MenuGrafico {
             LanzadorNReinas.ejecutarSimulacion();
         });
         panel.add(b3);
-
-        JButton b4 = new JButton("Salir");
-        b4.addActionListener(e -> System.exit(0));
-        panel.add(b4);
 
         // Un único add al CENTER: no debe haber más adds en este frame
         add(panel, BorderLayout.CENTER);
